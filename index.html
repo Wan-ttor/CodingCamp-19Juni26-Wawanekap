@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do List Life Dashboard</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- Greeting Widget -->
+    <section id="greeting">
+      <h1 class="visually-hidden">Dashboard</h1>
+      <div id="greeting-time"></div>
+      <div id="greeting-date"></div>
+      <div id="greeting-message"></div>
+    </section>
+
+    <!-- Focus Timer Widget -->
+    <section id="focus-timer">
+      <h2>Focus Timer</h2>
+      <div id="timer-display"></div>
+      <button id="timer-start">Start</button>
+      <button id="timer-stop">Stop</button>
+      <button id="timer-reset">Reset</button>
+      <div id="timer-complete-msg" hidden></div>
+    </section>
+
+    <!-- To-Do List Widget -->
+    <section id="todo">
+      <h2>To-Do List</h2>
+      <label for="todo-input" class="sr-only">New task</label>
+      <input id="todo-input" type="text" placeholder="Add a task…" aria-label="New task" />
+      <button id="todo-add-btn">Add</button>
+      <div id="todo-error" role="alert" aria-live="polite"></div>
+      <ul id="todo-list"></ul>
+    </section>
+
+    <!-- Quick Links Widget -->
+    <section id="quick-links">
+      <h2>Quick Links</h2>
+      <label for="links-label-input" class="visually-hidden">Link label</label>
+      <input id="links-label-input" type="text" aria-label="Link label" placeholder="Label" />
+      <label for="links-url-input" class="visually-hidden">Link URL</label>
+      <input id="links-url-input" type="url" aria-label="Link URL" placeholder="https://…" />
+      <button id="links-add-btn">Add Link</button>
+      <div id="links-error"></div>
+      <div id="links-list"></div>
+    </section>
+
+
+
+<button id="drakModeBtn">Drak Mode</button>
+
+    <script src="js/app.js"></script>
+  </body>
+</html>
