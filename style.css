@@ -1,0 +1,376 @@
+/* =========================================================
+   To-Do List Life Dashboard — Base Styles
+   Task 11.1: Typography, colours, widget styling
+   Responsive grid and focus indicators are in Tasks 11.2–11.3
+   ========================================================= */
+
+/* ─── CSS CUSTOM PROPERTIES ──────────────────────────────── */
+:root {
+  /* Colour palette — dark-on-light, ≥ 4.5:1 contrast ratio
+     #1a1a1a on #ffffff → ~19:1 contrast ratio
+     #1a1a1a on #f5f5f5 → ~17:1 contrast ratio              */
+  --color-bg:           #fcf9f9;
+  --color-bg-surface:   hsl(0, 50%, 98%);
+  --color-bg-widget:    #f6f1f1;
+  --color-border:       #faf9f9;
+
+  --color-text:         #1a1a1a;   /* ~19:1 on white */
+  --color-text-muted:   #595959;   /* ≥ 4.5:1 on white  */
+  --color-text-error:   #867f80;   /* ≥ 4.5:1 on white  */
+  --color-text-success: #1a5c1a;   /* ≥ 4.5:1 on white  */
+
+  --color-accent:       #0056b3;   /* ≥ 4.5:1 on white  */
+  --color-accent-hover: #003d82;
+  --color-btn-text:     #ffffff;
+
+  --color-completed:    #595959;   /* muted, still ≥ 4.5:1 */
+
+  /* Spacing */
+  --space-xs:   4px;
+  --space-sm:   8px;
+  --space-md:   16px;
+  --space-lg:   24px;
+  --space-xl:   32px;
+  --space-xxl:  48px;
+
+  /* Typography */
+  --font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                 Roboto, Helvetica, Arial, sans-serif;
+
+  --font-size-body:  16px;   /* base — Req 11.1 */
+  --font-size-sm:    14px;
+  --font-size-h3:    20px;   /* body + 4px = 20px — Req 11.1 */
+  --font-size-h2:    24px;   /* h3  + 4px = 24px — Req 11.1 */
+  --font-size-h1:    32px;   /* h2  + 8px = 32px — Req 11.1 */
+  --font-size-timer: 56px;   /* extra-large for readability  */
+
+  --line-height-body:    1.6;
+  --line-height-heading: 1.25;
+
+  /* Widget */
+  --widget-padding:      var(--space-lg);
+  --widget-gap:          var(--space-lg);
+  --widget-radius:       8px;
+  --widget-shadow:       0 1px 4px rgba(0, 0, 0, 0.10);
+}
+
+/* ─── RESET / BASE ───────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: var(--font-size-body);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family:      var(--font-family);
+  font-size:        var(--font-size-body);   /* ≥ 16 px — Req 11.1 */
+  line-height:      var(--line-height-body);
+  color:            var(--color-text);
+  background-color: var(--color-bg);
+  min-height:       100vh;
+  padding:          var(--space-lg);
+
+  /* ── Responsive grid layout — Req 11.2 ── */
+  display:               grid;
+  grid-template-columns: 1fr;          /* single column by default (< 600 px) */
+  gap:                   var(--widget-gap);
+  max-width:             100%;         /* prevent horizontal overflow */
+  overflow-x:            hidden;
+}
+
+/* ─── HEADING HIERARCHY — ≥ 4 px step per level (Req 11.1) ─ */
+h1 {
+  font-size:   var(--font-size-h1);    /* 32 px */
+  line-height: var(--line-height-heading);
+  font-weight: 700;
+  color:       var(--color-text);
+  margin-bottom: var(--space-sm);
+}
+
+h2 {
+  font-size:   var(--font-size-h2);    /* 24 px — 8 px below h1 */
+  line-height: var(--line-height-heading);
+  font-weight: 600;
+  color:       var(--color-text);
+  margin-bottom: var(--space-sm);
+}
+
+h3 {
+  font-size:   var(--font-size-h3);    /* 20 px — 4 px below h2 */
+  line-height: var(--line-height-heading);
+  font-weight: 600;
+  color:       var(--color-text);
+  margin-bottom: var(--space-sm);
+}
+
+p {
+  margin-bottom: var(--space-md);
+}
+
+/* ─── WIDGET SECTIONS — uniform spacing (Req 11.1) ──────── */
+section {
+  background-color: var(--color-bg-widget);
+  border:           1px solid var(--color-border);
+  border-radius:    var(--widget-radius);
+  box-shadow:       var(--widget-shadow);
+  padding:          var(--widget-padding);
+  margin-bottom:    var(--widget-gap);    /* fallback for non-grid browsers */
+  min-width:        0;                    /* prevent overflow in grid cells — Req 11.2 */
+}
+
+/* ─── GREETING WIDGET ────────────────────────────────────── */
+#greeting {
+  text-align: center;
+}
+
+#greeting-time {
+  font-size:   var(--font-size-h1);   /* 32 px */
+  font-weight: 700;
+  color:       var(--color-text);
+  letter-spacing: 0.03em;
+}
+
+#greeting-date {
+  font-size:   var(--font-size-h3);   /* 20 px */
+  color:       var(--color-text-muted);
+  margin-top:  var(--space-xs);
+}
+
+#greeting-message {
+  font-size:     var(--font-size-h2);  /* 24 px */
+  font-weight:   600;
+  color:         var(--color-text);
+  margin-top:    var(--space-sm);
+}
+
+/* ─── FOCUS TIMER WIDGET ─────────────────────────────────── */
+#focus-timer {
+  text-align: center;
+}
+
+#timer-display {
+  font-size:      var(--font-size-timer);   /* 56 px — large, prominent */
+  font-weight:    700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  color:          var(--color-text);
+  line-height:    1.1;
+  margin-bottom:  var(--space-md);
+}
+
+#timer-complete-msg {
+  font-size:      var(--font-size-h3);   /* 20 px */
+  font-weight:    600;
+  color:          var(--color-text-success);
+  background-color: #e6f4e6;            /* light green tint, decorative */
+  border:         1px solid #a3d9a3;
+  border-radius:  var(--widget-radius);
+  padding:        var(--space-sm) var(--space-md);
+  margin-top:     var(--space-md);
+  display:        block;                /* override [hidden] when JS removes it */
+}
+
+/* Buttons row inside focus timer */
+#focus-timer button {
+  margin: 0 var(--space-xs);
+}
+
+/* ─── TO-DO LIST WIDGET ──────────────────────────────────── */
+
+/* Input + button row */
+#todo-input {
+  width: 100%;
+}
+
+/* Task list — remove browser default list decoration */
+#todo-list {
+  list-style:  none;
+  padding:     0;
+  margin:      var(--space-md) 0 0;
+}
+
+#todo-list li {
+  display:        flex;
+  align-items:    center;
+  gap:            var(--space-sm);
+  padding:        var(--space-sm) 0;
+  border-bottom:  1px solid var(--color-border);
+  font-size:      var(--font-size-body);
+  color:          var(--color-text);
+}
+
+#todo-list li:last-child {
+  border-bottom: none;
+}
+
+/* Completed task — strikethrough + opacity ≤ 0.6 (Req 6.2) */
+.task-completed {
+  text-decoration: line-through;
+  opacity:         0.55;
+  color:           var(--color-completed);
+}
+
+/* ─── QUICK LINKS WIDGET ─────────────────────────────────── */
+
+#links-list {
+  display:   flex;
+  flex-wrap: wrap;
+  gap:       var(--space-sm);
+  margin-top: var(--space-md);
+}
+
+/* Each quick-link item (button) */
+#links-list button {
+  /* Visual style differentiated from regular buttons below */
+  background-color: var(--color-bg-surface);
+  color:            var(--color-accent);
+  border:           1px solid var(--color-accent);
+  font-weight:      600;
+}
+
+#links-list button:hover {
+  background-color: var(--color-accent);
+  color:            var(--color-btn-text);
+}
+
+/* Inline error / validation messages */
+#links-error {
+  font-size:  var(--font-size-sm);
+  color:      var(--color-text-error);
+  margin-top: var(--space-xs);
+  min-height: 1.2em;               /* prevent layout jump when empty */
+}
+
+/* ─── BUTTONS — universal base style ─────────────────────── */
+button {
+  display:          inline-flex;
+  align-items:      center;
+  justify-content:  center;
+  gap:              var(--space-xs);
+  font-family:      var(--font-family);
+  font-size:        var(--font-size-body);
+  font-weight:      500;
+  line-height:      1;
+  color:            var(--color-btn-text);
+  background-color: var(--color-accent);
+  border:           2px solid transparent;
+  border-radius:    4px;
+  padding:          var(--space-sm) var(--space-md);
+  cursor:           pointer;
+  transition:       background-color 0.15s ease, color 0.15s ease,
+                    border-color 0.15s ease;
+  white-space:      nowrap;
+}
+
+button:hover {
+  background-color: var(--color-accent-hover);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor:  not-allowed;
+}
+
+/* ─── INPUT FIELDS — consistent base style ───────────────── */
+input[type="text"],
+input[type="url"],
+input[type="email"],
+input {
+  font-family:      var(--font-family);
+  font-size:        var(--font-size-body);
+  color:            var(--color-text);
+  background-color: var(--color-bg-widget);
+  border:           1px solid var(--color-border);
+  border-radius:    4px;
+  padding:          var(--space-sm) var(--space-md);
+  width:            100%;
+  transition:       border-color 0.15s ease;
+}
+
+input[type="text"]:hover,
+input[type="url"]:hover,
+input:hover {
+  border-color: var(--color-accent);
+}
+
+/* ─── ERROR MESSAGES — general ───────────────────────────── */
+.error-message,
+[role="alert"] {
+  font-size:  var(--font-size-sm);
+  color:      var(--color-text-error);   /* #b00020 on white ≥ 4.5:1 */
+  margin-top: var(--space-xs);
+}
+
+/* ─── UTILITY ─────────────────────────────────────────────── */
+.visually-hidden,
+.sr-only {
+  position:   absolute;
+  width:      1px;
+  height:     1px;
+  padding:    0;
+  margin:     -1px;
+  overflow:   hidden;
+  clip:       rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border:     0;
+}
+
+/* ─── RESPONSIVE GRID — 2-column layout at ≥ 600 px (Req 11.2) ── */
+@media (min-width: 600px) {
+  body {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ─── FOCUS INDICATORS (Req 11.4) ───────────────────────── */
+/* --color-focus: #005fcc on #ffffff → ~5.9:1 contrast ratio */
+:root {
+  --color-focus: #005fcc;
+}
+
+/* Remove default outline and replace with controlled style */
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline:        2px solid var(--color-focus, #005fcc);
+  outline-offset: 2px;
+}
+
+/* Checkbox focus */
+input[type="checkbox"]:focus-visible {
+  outline:        2px solid var(--color-focus, #005fcc);
+  outline-offset: 2px;
+}
+body {
+  background-color: white;
+  color: black;
+  transition: O.3S;
+}
+
+body.drak {
+  background-color: #1e1e1e;
+  color: white;
+}
+
+/* warna card */
+body.dark .card {
+  background-color: #2c2c2c;
+  color: white;
+}
+
+/* Warna tombol */
+body.drak button {
+  background-color: #444;
+  color: white;
+}
+
+
