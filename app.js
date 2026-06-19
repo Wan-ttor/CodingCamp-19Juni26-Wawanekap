@@ -910,10 +910,10 @@ document.addEventListener('DOMContentLoaded', () => {
   QuickLinks.init();
 });
 
- const darkBtn = document .getElementById ("drakModeBtn");
+ const darkModeBtn = document .getElementById ("drakModeBtn");
  
- darkBtn.addEventListener("click", function () {
-    document.body.classList.toggle("drak");
+ darkModeBtn.addEventListener("click", () => {
+    document.body.classList.toggle("drak-mode");
 
  });
  
