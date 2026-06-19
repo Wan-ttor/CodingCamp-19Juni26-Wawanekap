@@ -373,4 +373,16 @@ body.drak button {
   color: white;
 }
 
+.sr-only,
+.visually-hidden (
+posion: absulute;
+width: 1px;
+heigth: 1px;
+padding: 0;
+margin: -1px;
+overflow: hideen;
+clip: rect(0 ,0, 0 , 0)
+border: 0;
+}
+
 
